@@ -13,3 +13,9 @@ client.on('message', msg => {
 });
 
 client.login(auth.token);
+
+client.on('messageReactionAdd', (mr, user) => {
+	// Don't care about bot reactions
+	if (user.bot) return;
+
+}
