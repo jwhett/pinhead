@@ -1,0 +1,24 @@
+{
+  "name": "pinhead",
+  "version": "0.0.1",
+  "description": "bot to pin messages in Discord",
+  "main": "main.js",
+  "scripts": {
+    "bot": "node main.js",
+    "lint": "eslint main.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwhett/pinhead.git"
+  },
+  "author": "Josh Whetton",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/jwhett/pinhead/issues"
+  },
+  "homepage": "https://github.com/jwhett/pinhead#readme",
+  "dependencies": {
+    "discord.js": "^12.0.0",
+    "eslint": "^6.6.0"
+  }
+}
