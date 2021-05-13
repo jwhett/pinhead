@@ -8,7 +8,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
       if (msg.content === 'ping') {
-              msg.reply('Is ${client.user.tag} an instrument?');
+              msg.reply(`Is ${client.user.tag} an instrument?`);
       }
 });
 
