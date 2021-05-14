@@ -7,6 +7,12 @@ client.on('ready', () => {
       console.log(`Logged in as ${client.user.tag}!`);
 });
 
+client.on('message', message => {
+    if (message.content === 'pinhead') {
+        message.channel.send("https://media.giphy.com/media/NsGsjTRJBj8Fq/giphy.gif");
+    }
+});
+
 client.login(auth.token);
 
 client.on('messageReactionAdd', (mr, user) => {
