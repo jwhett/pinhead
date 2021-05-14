@@ -31,9 +31,9 @@ client.on('messageReactionAdd', (mr, user) => {
 
 function isMod(messageReaction, user) {
     const member = messageReaction.message.guild.member(user);
-    return member && member.roles.cache.find(role => role.name === config.ROLE);
+    return member && member.roles.cache.some(role => role.name === config.ROLE);
 }
 
 function hasModDenials(messageReaction) {
-    return messageReaction.message.reactions.cache.find(reaction => reaction._emoji.name === denyEmoji && reaction.users.cache.find(user => isMod(messageReaction,user)));
+    return messageReaction.message.reactions.cache.some(reaction => reaction._emoji.name === denyEmoji && reaction.users.cache.some(user => isMod(messageReaction,user)));
 }
