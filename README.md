@@ -6,7 +6,7 @@ Requires auth and config files at the moment:
 //auth.json
 // Bot token
 {
-	"token": "TOKENHERE",
+	"token": "TOKENHERE"
 }
 ```
 
@@ -16,5 +16,6 @@ Requires auth and config files at the moment:
 // required to pin a message to channel.
 {
 	"MAX": INT,
+	"ROLE": "mod_role_name"
 }
 ```
