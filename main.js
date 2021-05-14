@@ -18,6 +18,7 @@ client.login(auth.token);
 client.on('messageReactionAdd', (mr, user) => {
 	// Don't care about bot reactions
 	if (user.bot) return;
+	console.log(`reaction from ${user.username}`);
 	if (mr.emoji.name === '📌' && mr.message.pinnable && mr.count === config.MAX){
             mr.message.pin();
 	};
