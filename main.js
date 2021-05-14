@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const auth = require('./auth.json');
 const config = require('./config.json');
+const denyEmoji = '🚫';
+const pinEmoji = '📌';
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -16,14 +18,13 @@ if (message.content === 'pinhead') {
 client.login(auth.token);
 
 client.on('messageReactionAdd', (mr, user) => {
-	// Don't care about bot reactions
-	if (user.bot) return;
-	if (mr.emoji.name === '🚫') { // block pinning
-		if (isMod(mr,user)) {
-			console.log(`guild member is a mod`);
-		}
+	if (user.bot) return; // Don't care about bot reactions
+
+	if (hasModDenials(mr)) {
+        	console.log(`that message has been denied by a mod`);
 	}
-	if (mr.emoji.name === '📌' && mr.message.pinnable && mr.count === config.MAX){
+
+	if (mr.emoji.name === pinEmoji && mr.message.pinnable && mr.count === config.MAX){
 		mr.message.pin();
 	}
 });
@@ -31,4 +32,8 @@ client.on('messageReactionAdd', (mr, user) => {
 function isMod(messageReaction, user) {
     const member = messageReaction.message.guild.member(user);
     return member && member.roles.cache.find(role => role.name === config.ROLE);
+}
+
+function hasModDenials(messageReaction) {
+    return messageReaction.message.reactions.cache.find(reaction => reaction._emoji.name === denyEmoji && reaction.users.cache.find(user => isMod(messageReaction,user)));
 }
