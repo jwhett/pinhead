@@ -20,11 +20,11 @@ client.login(auth.token);
 client.on('messageReactionAdd', (mr, user) => {
 	if (user.bot) return; // Don't care about bot reactions
 
-	if (hasModDenials(mr)) {
-        	console.log(`that message has been denied by a mod`);
-	}
-
 	if (mr.emoji.name === pinEmoji && mr.message.pinnable && mr.count === config.MAX){
+        	if (hasModDenials(mr)) {
+                	console.log("msg was not pinned as it was denied by a mod.");
+            		return;
+        	}
 		mr.message.pin();
 	}
 });
