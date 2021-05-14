@@ -19,13 +19,16 @@ client.on('messageReactionAdd', (mr, user) => {
 	// Don't care about bot reactions
 	if (user.bot) return;
 	if (mr.emoji.name === '🚫') { // block pinning
-		// get the guild member so we can check roles
-		const member = mr.message.guild.member(user);
-		if (member && member.roles.cache.find(role => role.name === config.ROLE)) {
-				console.log(`guild member is a mod`);
+		if (isMod(mr,user)) {
+			console.log(`guild member is a mod`);
 		}
 	}
 	if (mr.emoji.name === '📌' && mr.message.pinnable && mr.count === config.MAX){
 		mr.message.pin();
 	}
 });
+
+function isMod(messageReaction, user) {
+    const member = messageReaction.message.guild.member(user);
+    return member && member.roles.cache.find(role => role.name === config.ROLE);
+}
