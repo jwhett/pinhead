@@ -1,22 +1,18 @@
 ### Pinhead
 
-Requires auth and config files at the moment:
+Requires the following environment variables:
 
-```javascript
-//auth.json
-// Bot token
-{
-	"token": "TOKENHERE"
-}
-```
+- `TOKEN`: bot token
+- `MAX`: maximum number of :pushpin: to pin a message
+- `ROLE`: the name of the "moderator" role in the server
+- `TLDR`: ID of the channel you want "logs" to go
 
-```javascript
-//config.json
-// Max number of :pinhead: reactions
-// required to pin a message to channel.
-{
-	"MAX": INT,
-	"ROLE": "mod_role_name",
-	"TLDR": "CHANNEL_ID"
-}
-```
+
+### DEMO
+
+![image of demo](images/demo.png)
+
+
+### HELP
+
+![image of help output](images/help.png)

@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const auth = require('./auth.json');
-const config = require('./config.json');
+const TOKEN = process.env.TOKEN;
+const MAX = process.env.MAX;
+const ROLE = process.env.ROLE;
+const TLDR = process.env.TLDR;
 const denyEmoji = '🚫';
 const pinEmoji = '📌';
 const enableEmoji = '👍';
@@ -14,7 +16,7 @@ client.on('ready', () => {
     client.user.setPresence({ activity: { name: 'with pins' }, status: 'online' });
 });
 
-client.login(auth.token);
+client.login(TOKEN);
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -36,19 +38,19 @@ client.on('message', message => {
 client.on('messageReactionAdd', (mr, user) => {
 	if (user.bot || disabled) return;
 
-	if (mr.emoji.name === pinEmoji && mr.message.pinnable && mr.count === config.MAX){
+	if (mr.emoji.name === pinEmoji && mr.message.pinnable && mr.count === MAX){
         	if (hasModDenials(mr)) {
                 	console.log("msg was not pinned as it was denied by a mod.");
             		return;
         	}
 		mr.message.pin();
-		client.channels.cache.get(config.TLDR).send(`New pin in **#${mr.message.channel.name}**. Here's the content:\n${mr.message.content}`);
+		client.channels.cache.get(TLDR).send(`New pin in **#${mr.message.channel.name}**. Here's the content:\n${mr.message.content}`);
 	}
 });
 
 function isMod(message, user) {
     const member = message.guild.member(user);
-    return member && member.roles.cache.some(role => role.name === config.ROLE);
+    return member && member.roles.cache.some(role => role.name === ROLE);
 }
 
 function hasModDenials(messageReaction) {
@@ -70,5 +72,5 @@ function enable() {
 }
 
 function sendHelp(message) {
-    message.channel.send(`React to messages you want to pin with ${pinEmoji}. After ${config.MAX} ${pinEmoji} reactions, the message will be pinned to the channel. Mods can react with ${denyEmoji} to prevent a message from being pinned.`);
+    message.channel.send(`React to messages you want to pin with ${pinEmoji}. After ${MAX} ${pinEmoji} reactions, the message will be pinned to the channel. Mods can react with ${denyEmoji} to prevent a message from being pinned.`);
 }
