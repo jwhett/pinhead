@@ -42,6 +42,7 @@ client.on('messageReactionAdd', (mr, user) => {
             		return;
         	}
 		mr.message.pin();
+		client.channels.cache.get(config.TLDR).send(`New pin in **#${mr.message.channel.name}**. Here's the content:\n${mr.message.content}`);
 	}
 });
 
