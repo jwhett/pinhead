@@ -16,6 +16,7 @@ Requires auth and config files at the moment:
 // required to pin a message to channel.
 {
 	"MAX": INT,
-	"ROLE": "mod_role_name"
+	"ROLE": "mod_role_name",
+	"TLDR": "CHANNEL_ID"
 }
 ```
