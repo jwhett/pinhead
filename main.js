@@ -28,6 +28,8 @@ client.on('message', message => {
 	} else if (command === 'disable' && isMod(message, message.author)) {
 		disable();
 		message.react(disableEmoji);
+	} else if (command === 'help') {
+                sendHelp(message);
 	}
 });
 
@@ -64,4 +66,8 @@ function enable() {
     disabled = false;
     client.user.setPresence({ activity: { name: 'with pins' }, status: 'online' });
     console.log("pinning enabled");
+}
+
+function sendHelp(message) {
+    message.channel.send(`React to messages you want to pin with ${pinEmoji}. After ${config.MAX} ${pinEmoji} reactions, the message will be pinned to the channel. Mods can react with ${denyEmoji} to prevent a message from being pinned.`);
 }
